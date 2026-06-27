@@ -1,0 +1,6 @@
+{
+  "name": "NovaMart",
+  "description": "An enterprise-grade multi-vendor e-commerce marketplace featuring robust Customer, Seller, and Admin dashboards, powered by AI product recommendations and analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

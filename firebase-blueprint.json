@@ -1,0 +1,127 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile containing roles, address books, and wallets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "seller", "admin"] },
+        "avatar": { "type": "string" },
+        "balance": { "type": "number" },
+        "loyaltyPoints": { "type": "number" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Seller": {
+      "title": "Seller",
+      "description": "Seller profile details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "businessName": { "type": "string" },
+        "description": { "type": "string" },
+        "rating": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "approved"] },
+        "ownerId": { "type": "string" },
+        "totalSales": { "type": "number" },
+        "balance": { "type": "number" }
+      },
+      "required": ["id", "businessName", "ownerId"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Store items offered for sale",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "description": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "category": { "type": "string" },
+        "brand": { "type": "string" },
+        "rating": { "type": "number" },
+        "stock": { "type": "number" }
+      },
+      "required": ["id", "name", "price", "sellerId"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Purchase transaction records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "gst": { "type": "number" },
+        "discount": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string" }
+      },
+      "required": ["id", "buyerId", "total"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Promo and voucher codes",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "discountValue": { "type": "number" },
+        "type": { "type": "string", "enum": ["fixed", "percent"] },
+        "expiryDate": { "type": "string" },
+        "minOrderValue": { "type": "number" },
+        "description": { "type": "string" }
+      },
+      "required": ["code", "discountValue", "type"]
+    },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "Customer support tickets and chats",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "subject": { "type": "string" },
+        "status": { "type": "string", "enum": ["open", "closed"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "buyerId", "subject", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/sellers/{sellerId}": {
+      "schema": "Seller",
+      "description": "Seller business directories"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Available products catalog"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer order records"
+    },
+    "/coupons/{couponId}": {
+      "schema": "Coupon",
+      "description": "Store discount coupons"
+    },
+    "/tickets/{ticketId}": {
+      "schema": "SupportTicket",
+      "description": "Customer help and support tickets"
+    }
+  }
+}
